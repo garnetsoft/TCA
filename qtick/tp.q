@@ -122,7 +122,8 @@ upd:{[t;d]
  pub[t];                                                                / publish table t
  empty t;                                                               / empty the cache (delete from table but keeps `g# on sym)
  };
-
+ 
+.u.upd:upd; 
 
 /
   function that triggers eod on all subscribers
