@@ -24,7 +24,7 @@ SUBS:();                                                                / set su
   return - nothing
 \
 set_log_name:{[path;d]
- `L set hsym `$path,"/tp-",string d;                          / set log name L, format should be /path_to_log_to/ticker_plant-YYYY.MM.DD
+ `L set hsym `$path,"/tp",string d;                          / set log name L, format should be /path_to_log_to/ticker_plant-YYYY.MM.DD
  };
 
 /
@@ -148,7 +148,7 @@ trigger_eod:{[]
     CDATE::.z.D;                / change current date to the next day
     SEQ::0;                     / reset sequence number
     L::();                      / reset log file and prepare to create a new log file
-    SUBS::();                   / reset subscribers; although is it needed?
+    / SUBS::();                   / reset subscribers; although is it needed?
     init[]];                    / reinitialize TP
  };
 
