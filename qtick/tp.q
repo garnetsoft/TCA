@@ -40,7 +40,8 @@ create_log:{[]
   return - nothing
 \
 set_seq_num:{[l]
- `SEQ set -11!(-2;l);                                                   / find number messages logged so far and set SEQ that number using -11!
+ / `SEQ set -11!(-2;l);                                                   / find number messages logged so far and set SEQ that number using -11!
+ `SEQ set count get l;
  };
 
 /
@@ -50,7 +51,7 @@ init:{
  set_log_name[LPATH;CDATE];                                     / set logname globally, so we can accecss it in the process
  create_log[];                                                  / init the log
  set_seq_num[L];                                                / set SEQ
- value "\\t 1000";                                              / set timer to run ever 1 second
+ value "\\t 100";                                              / set timer to run ever 1 second
  };
 
 /
@@ -90,7 +91,7 @@ tp_sub:{[]
   return - list of vectors (first one being the time vector)
 \
 timestamp:{[d]
- :(enlist(max count each d)#.z.T),d;                            / timestamp data with TP time of arrival
+ :(enlist(max count each d)#.z.Z),d;                            / timestamp data with TP time of arrival
  };
 
 /
@@ -115,10 +116,12 @@ log_to_tp:{[e]
   return - nothing
 \
 upd:{[t;d]
- SEQ+:1;                                                                / increase sequence number
- / d:timestamp[d];                                                        / timstamp the data
- log_to_tp[enlist(`upd;t;d)];                                           / log to tickerplant log on disk
+ / show d;
+ d:timestamp[d];                                                        / timstamp the data
+ / log_to_tp[enlist(`upd;t;d)];                                           / log to tickerplant log on disk
  t insert d;
+ / log_to_tp[enlist(`upd;t;d)];                                           / log to tickerplant log on disk
+ SEQ+:1;                                                                / increase sequence number
  pub[t];                                                                / publish table t
  empty t;                                                               / empty the cache (delete from table but keeps `g# on sym)
  };

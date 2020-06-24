@@ -4,9 +4,9 @@ architecture setup (data flow): fh -> tp -> rt -> hdb
 
 FINAL TECHNICAL SETUP
 =====================
-- start tp on port 5000: 				q tp.q  -p 5000 -tp_path tplog
-- start rt on port 5001: 				q rt.q  -p 5001 -tp ::5000 -hdb data
-- start hdb on port 5002: 				q hdb.q -p 5002 -db data
+- start tp on port 6000: 				q tp.q  -p 6000 -tp_path tplog
+- start rt on port 6001: 				q rt.q  -p 6001 -tp ::6000 -hdb data
+- start hdb on port 6002: 				q hdb.q -p 6002 -db data
 
 - to start tp feedhandler processes, goto:
 
